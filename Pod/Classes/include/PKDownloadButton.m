@@ -221,6 +221,10 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
     
     [self.stateViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         SafeObjClassCast(UIView, view, obj);
+        if ([view isKindOfClass:PKPendingView.class]) {
+          [constraints addObjectsFromArray: [NSLayoutConstraint constraintsForCenterView:view withView:self]];
+          return;
+        }
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsForWrappedSubview:view
                                                                                withInsets:UIEdgeInsetsZero]];
     }];
