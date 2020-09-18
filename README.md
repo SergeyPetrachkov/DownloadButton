@@ -120,6 +120,8 @@ it, simply add the following line to your Podfile:
 pod "DownloadButton"
 ```
 
+or starting with Xcode 11 you can add it as a [Swift package](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app).
+
 ## Author
 
 Pavel Katunin, wk.katunin@gmail.com
