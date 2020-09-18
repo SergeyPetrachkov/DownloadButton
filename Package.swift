@@ -17,7 +17,7 @@ let package = Package(
     .target(
       name: "DownloadButton",
       dependencies: [],
-      path: "Pod/Classes/include",
+      path: "Pod/Classes/",
       exclude: ["Example"]
     ),
   ]
