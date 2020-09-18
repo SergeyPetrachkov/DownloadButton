@@ -44,6 +44,8 @@
     [self setBackgroundImage:nil forState:UIControlStateHighlighted];
     [self setAttributedTitle:nil forState:UIControlStateNormal];
     [self setAttributedTitle:nil forState:UIControlStateHighlighted];
+    [self setCornerRadius:0];
+    [self setLineWidth:0];
 }
 
 @end

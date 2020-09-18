@@ -34,6 +34,8 @@ typedef void(^DownloadButtonTappedCallback)(PKDownloadButton *downloadButton, PK
 IB_DESIGNABLE
 @interface PKDownloadButton : UIView
 
+-(instancetype)initWithFrame:(CGRect)frame andDownloadTitle:(NSString *)downloadTitle andRemoveTitle:(NSString *)removeTitle;
+
 @property (nonatomic, weak) IBOutlet id <PKDownloadButtonDelegate> delegate;
 @property (nonatomic, copy) DownloadButtonTappedCallback callback;
 

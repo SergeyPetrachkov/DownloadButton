@@ -19,6 +19,9 @@
 @property (nonatomic, weak) PKBorderedButton *downloadedButton;
 @property (nonatomic, weak) PKPendingView *pendingView;
 
+@property (nonatomic, strong) NSString *defaultDownloadString;
+@property (nonatomic, strong) NSString *defaultRemoveString;
+
 @property (nonatomic, strong) NSMutableArray *stateViews;
 
 - (PKBorderedButton *)createStartDownloadButton;
@@ -80,18 +83,28 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
 #pragma mark - Initialization
 
 - (id)initWithCoder:(NSCoder *)decoder {
+    self.defaultRemoveString = @"REMOVE";
+    self.defaultDownloadString = @"DOWNLOAD";
     return CommonInit([super initWithCoder:decoder]);
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
+    self.defaultRemoveString = @"REMOVE";
+    self.defaultDownloadString = @"DOWNLOAD";
+    return CommonInit([super initWithFrame:frame]);
+}
+
+- (instancetype)initWithFrame:(CGRect)frame andDownloadTitle:(NSString *)downloadTitle andRemoveTitle:(NSString *)removeTitle {
+    self.defaultRemoveString = downloadTitle;
+    self.defaultDownloadString = removeTitle;
     return CommonInit([super initWithFrame:frame]);
 }
 
 - (void)tintColorDidChange {
-	[super tintColorDidChange];
+    [super tintColorDidChange];
 	
     [self updateButton:self.startDownloadButton title:[self.startDownloadButton titleForState:UIControlStateNormal] font:self.startDownloadButton.titleLabel.font];
-	[self updateButton:self.downloadedButton title:[self.downloadedButton titleForState:UIControlStateNormal] font:self.downloadedButton.titleLabel.font];
+    [self updateButton:self.downloadedButton title:[self.downloadedButton titleForState:UIControlStateNormal] font:self.downloadedButton.titleLabel.font];
 }
 
 
@@ -137,7 +150,7 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
     PKBorderedButton *startDownloadButton = [PKBorderedButton buttonWithType:UIButtonTypeCustom];
     [startDownloadButton configureDefaultAppearance];
     
-	[self updateButton:startDownloadButton title:@"DOWNLOAD"];
+    [self updateButton:startDownloadButton title:self.defaultDownloadString];
 	
     [startDownloadButton addTarget:self
                             action:@selector(currentButtonTapped:)
@@ -156,7 +169,7 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
     PKBorderedButton *downloadedButton = [PKBorderedButton buttonWithType:UIButtonTypeCustom];
     [downloadedButton configureDefaultAppearance];
 
-	[self updateButton:downloadedButton title:@"REMOVE"];
+    [self updateButton:downloadedButton title:self.defaultRemoveString];
     
     [downloadedButton addTarget:self
                          action:@selector(currentButtonTapped:)
